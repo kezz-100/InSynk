@@ -47,6 +47,11 @@ function AdminHeader() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link to="/allnewsad" className="nav-link">
+                All Tasks
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link to="/timeline" className="nav-link">
                 Calendar
               </Link>

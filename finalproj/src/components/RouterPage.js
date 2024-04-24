@@ -11,6 +11,8 @@ import News from "./News";
 //import UserTask from "./UserTask";
 import MyNews from "./MyNews";
 import AllNews from "./AllNews";
+import AllNewsAd from "./AllNewsAd";
+
 import ApproveCompletion from "./ApproveCompletion";
 import Timeline from "./Timeline";
 import TimelineU from "./TimelineU";
@@ -43,7 +45,10 @@ export default function RouterPage() {
         <Route path="/timelineU" element={<TimelineU />} />
 
         <Route path="/mynews" element={<MyNews />} />
+
         <Route path="/allnews" element={<AllNews />} />
+        <Route path="/allnewsad" element={<AllNewsAd />} />
+
         <Route path="/approvecompletion" element={<ApproveCompletion />} />
       </Routes>
     </Router>
