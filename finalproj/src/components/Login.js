@@ -1,20 +1,23 @@
+// Import necessary dependencies and components
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate();
-
+  const navigate = useNavigate(); // Get navigation function from react-router
+  // State variables to manage email, password, and error messages
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  // Function to handle login
   const handleLogin = (e) => {
     e.preventDefault();
     setEmailError("");
     setPasswordError("");
 
+    // Validation
     let error = "";
     if (email === "") {
       setEmailError("Email address cannot be blank");
@@ -30,6 +33,7 @@ function Login() {
       return;
     }
 
+    // Create data object with email and password
     const data = {
       Email: email,
       Password: password,
@@ -37,6 +41,8 @@ function Login() {
       PhoneNo: "",
       UserType: "",
     };
+
+    // POST request to login endpoint
     const url = `https://localhost:7089/api/Registration/Login`;
     axios
       .post(url, data)
@@ -44,8 +50,9 @@ function Login() {
         const dt = result.data;
         if (dt.statusCode === 200) {
           localStorage.setItem("loggedEmail", email);
-          localStorage.setItem("username", dt.registration.name); // Corrected property name 'N'
+          localStorage.setItem("username", dt.registration.name);
 
+          // Redirect based on user type
           if (dt.registration.userType.toUpperCase() === "ADMIN") {
             navigate("/admindashboard");
           } else {

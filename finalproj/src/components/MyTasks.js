@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React, { Fragment, useEffect, useState } from "react";
 import UserHeader from "./UserHeader";
 import axios from "axios";
@@ -7,17 +8,20 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Center } from "@react-three/drei";
 
 export default function MyTasks() {
+  // State variables to manage task data, approved users, and UI states
   const [data, setData] = useState([]);
   const [approvedUsers, setApprovedUsers] = useState([]);
   const [adminChecking, setAdminChecking] = useState(false);
   const [adminDeleteMessage, setAdminDeleteMessage] = useState("");
 
+  // useEffect hook to fetch data on component mount
   useEffect(() => {
-    getData();
+    getData(); // Fetch task data
     getApprovedUsers();
     logLoggedInUser();
   }, []);
 
+  // Function to fetch task data from the server
   const getData = () => {
     const url = `https://localhost:7089/api/Tasks/TasksList`;
     axios
@@ -33,6 +37,7 @@ export default function MyTasks() {
       });
   };
 
+  // Function to handle task deletion
   const handleDelete = (id) => {
     const url = `https://localhost:7089/api/Tasks/DeleteTasks/${id}`;
     axios
@@ -53,6 +58,8 @@ export default function MyTasks() {
         console.log(error);
       });
   };
+
+  // Function to get priority color based on due date
   const getPriorityColor = (priority, dueDate) => {
     const timeRemaining = new Date(dueDate).getTime() - new Date().getTime();
     const weeksRemaining = timeRemaining / (1000 * 60 * 60 * 24 * 7);
@@ -66,6 +73,7 @@ export default function MyTasks() {
     }
   };
 
+  // Function to fetch approved users from the server
   const getApprovedUsers = () => {
     const url = `https://localhost:7089/api/Registration/RegistrationList`;
     const requestData = {
@@ -91,6 +99,7 @@ export default function MyTasks() {
       });
   };
 
+  // Function to mark task as complete
   const handleComplete = (id) => {
     const requestData = {
       Id: id,
@@ -121,6 +130,7 @@ export default function MyTasks() {
       });
   };
 
+  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -128,8 +138,10 @@ export default function MyTasks() {
     });
   };
 
+  // Get logged-in user email from local storage
   const loggedEmail = localStorage.getItem("loggedEmail");
 
+  // Filter task data based on logged-in user
   const filteredData = data.filter((tasks) =>
     approvedUsers.some(
       (user) =>
@@ -137,11 +149,13 @@ export default function MyTasks() {
     )
   );
 
+  // Log the logged-in user
   const logLoggedInUser = () => {
     const loggedEmail = localStorage.getItem("loggedEmail");
     console.log("Logged In User:", loggedEmail);
   };
 
+  // Get top two tasks based on due date
   const getTopTwoTasks = () => {
     const filteredData = data.filter((tasks) =>
       approvedUsers.some(
@@ -156,12 +170,14 @@ export default function MyTasks() {
     return sortedData.slice(0, 2);
   };
 
+  // Get remaining time for a task
   const getTimeRemaining = (dueDate) => {
     const timeRemaining = new Date(dueDate).getTime() - new Date().getTime();
     const daysRemaining = Math.ceil(timeRemaining / (1000 * 60 * 60 * 24));
     return daysRemaining;
   };
 
+  // Function to render circular countdowns for tasks
   const renderCircularCountdowns = () => {
     const topTwoTasks = getTopTwoTasks();
 

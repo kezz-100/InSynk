@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";

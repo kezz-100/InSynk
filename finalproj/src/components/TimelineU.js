@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React, { useEffect, useState } from "react";
 import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
@@ -15,15 +16,18 @@ import axios from "axios";
 import Footer from "./Footer";
 
 export default function TimelineU() {
+  // Define state variables for tasks data, selected appointment, and approved users
   const [tasksData, setTasksData] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [approvedUsers, setApprovedUsers] = useState([]);
 
+  // Fetch tasks data and approved users on component mount
   useEffect(() => {
     fetchTasksData();
     fetchApprovedUsers();
   }, []);
 
+  // Function to fetch tasks data from the server
   const fetchTasksData = () => {
     const url = `https://localhost:7089/api/Tasks/TasksList`;
     axios
@@ -39,6 +43,7 @@ export default function TimelineU() {
       });
   };
 
+  // Function to fetch approved users from the server
   const fetchApprovedUsers = () => {
     const url = `https://localhost:7089/api/Registration/RegistrationList`;
     const requestData = {
@@ -84,6 +89,7 @@ export default function TimelineU() {
     });
   };
 
+  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -91,6 +97,7 @@ export default function TimelineU() {
     });
   };
 
+  // Convert tasks data to scheduler appointments
   const schedulerData = convertToAppointments(tasksData, approvedUsers);
 
   // Function to customize appointment appearance based on priority and due date

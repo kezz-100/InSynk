@@ -1,18 +1,22 @@
+// Import necessary dependencies and components
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import Footer from "./Footer";
 
 export default function ApproveCompletion() {
+  // State variables to manage task data, approved users, and completion approval status
   const [data, setData] = useState([]);
   const [approvedUsers, setApprovedUsers] = useState([]);
   const [completionApproved, setCompletionApproved] = useState(false);
 
+  // Effect hook to fetch data and approved users on component mount
   useEffect(() => {
     getData();
     getApprovedUsers();
   }, []);
 
+  // Function to fetch task data
   const getData = () => {
     const url = `https://localhost:7089/api/Tasks/TasksList`;
     axios
@@ -28,11 +32,13 @@ export default function ApproveCompletion() {
       });
   };
 
+  // Function to get priority color based on due date
   //dynamic change
   const getPriorityColor = (priority, dueDate) => {
     const timeRemaining = new Date(dueDate).getTime() - new Date().getTime();
     const weeksRemaining = timeRemaining / (1000 * 60 * 60 * 24 * 7);
 
+    // Determine priority color based on weeks remaining
     if (weeksRemaining <= 1) {
       return { color: "red", text: "High" };
     } else if (weeksRemaining <= 2) {
@@ -42,6 +48,7 @@ export default function ApproveCompletion() {
     }
   };
 
+  // Function to fetch approved users
   const getApprovedUsers = () => {
     const url = `https://localhost:7089/api/Registration/RegistrationList`;
     const requestData = {
@@ -52,14 +59,14 @@ export default function ApproveCompletion() {
       PhoneNo: "phoneNo",
     };
     axios
-      .post(url, requestData)
+      .post(url, requestData) // Send POST request to fetch users
       .then((result) => {
-        const responseData = result.data;
+        const responseData = result.data; // Extract data from response
         if (responseData.statusCode === 200) {
           const approvedUsers = responseData.listRegistration.filter(
             (user) => user.isApproved === 1
-          );
-          setApprovedUsers(approvedUsers);
+          ); // Filter approved users from response data
+          setApprovedUsers(approvedUsers); // Update approved users state with fetched data
         }
       })
       .catch((error) => {
@@ -67,6 +74,7 @@ export default function ApproveCompletion() {
       });
   };
 
+  // Function to handle completion approval
   const handleApprove = (id) => {
     const requestData = {
       Id: id,
@@ -78,10 +86,10 @@ export default function ApproveCompletion() {
       AssignedUser: "", // Dummy value
     };
 
-    const url = `https://localhost:7089/api/Tasks/TasksApproval`;
+    const url = `https://localhost:7089/api/Tasks/TasksApproval`; // API endpoint for completion approval
 
     axios
-      .post(url, requestData)
+      .post(url, requestData) // Send POST request for completion approval
       .then((result) => {
         const responseData = result.data;
         if (responseData.statusCode === 200) {
@@ -97,6 +105,7 @@ export default function ApproveCompletion() {
       });
   };
 
+  // Function to scroll to top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

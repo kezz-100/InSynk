@@ -1,9 +1,11 @@
+// Import necessary dependencies and components
 import React, { Fragment, useEffect, useState } from "react";
 import AdminHeader from "./AdminHeader";
 import axios from "axios";
 import Footer from "./Footer";
 
 export default function Tasks() {
+  // Define state variables for task details, data, editing task ID, approved users, and errors
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -28,16 +30,20 @@ export default function Tasks() {
   const [tasksDeleted, setTasksDeleted] = useState(false);
 
   const [tasksData, setTasksData] = useState([]);
+
+  // Fetch initial data on component mount
   useEffect(() => {
     getData();
     getApprovedUsers();
   }, []);
 
+  // Update title and content length counters when title or content changes
   useEffect(() => {
     setTitleLength(MAX_TITLE_LENGTH - title.length);
     setContentLength(MAX_CONTENT_LENGTH - content.length);
   }, [title, content]);
 
+  // Function to format date and time string
   const formatDateTime = (dateTimeString) => {
     const options = {
       year: "numeric",
@@ -52,6 +58,7 @@ export default function Tasks() {
     return dateTime.toLocaleDateString("en-US", options);
   };
 
+  // Function to fetch tasks data from the server
   const getData = () => {
     const url = `https://localhost:7089/api/Tasks/TasksList`;
     axios
@@ -68,6 +75,7 @@ export default function Tasks() {
       });
   };
 
+  // Function to update reserved intervals based on task due dates
   const updateReservedIntervals = (listTasks) => {
     const reserved = listTasks.map((tasks) => {
       const dueDateTime = new Date(tasks.dueDate);
@@ -76,6 +84,7 @@ export default function Tasks() {
     setReservedIntervals(reserved);
   };
 
+  // Function to fetch approved users from the server
   const getApprovedUsers = () => {
     const url = `https://localhost:7089/api/Registration/RegistrationList`;
     const requestData = {
@@ -101,6 +110,7 @@ export default function Tasks() {
       });
   };
 
+  // Function to handle task save
   const handleSave = (e) => {
     e.preventDefault();
 
@@ -145,7 +155,7 @@ export default function Tasks() {
     const roundedMinutes = Math.round(selectedDateTime.getMinutes() / 15) * 15;
     selectedDateTime.setMinutes(roundedMinutes);
 
-    // If editing existing task, check for existing tasks with the same date and time interval
+    // Editing existing task, check for existing tasks with the same date and time interval
     if (editingTasksId !== null) {
       const existingTask = data.find((task) => {
         const taskDateTime = new Date(task.dueDate);
@@ -240,6 +250,7 @@ export default function Tasks() {
     }
   };
 
+  // Function to handle task deletion
   const handleDelete = (id) => {
     const url = `https://localhost:7089/api/Tasks/DeleteTasks/${id}`;
     axios
@@ -261,6 +272,7 @@ export default function Tasks() {
       });
   };
 
+  // Function to handle task editing
   const handleEdit = (id) => {
     const tasksToEdit = data.find((tasks) => tasks.id === id);
     setTitle(tasksToEdit.title);
@@ -271,6 +283,7 @@ export default function Tasks() {
     setEditingTasksId(id);
   };
 
+  // Function to clear task details
   const Clear = () => {
     setTitle("");
     setAssignedUser("");
@@ -280,6 +293,7 @@ export default function Tasks() {
     setEditingTasksId(null);
   };
 
+  // Function to get priority color based on due date
   const getPriorityColor = (priority, dueDate) => {
     const timeRemaining = new Date(dueDate).getTime() - new Date().getTime();
     const weeksRemaining = timeRemaining / (1000 * 60 * 60 * 24 * 7);
@@ -293,6 +307,7 @@ export default function Tasks() {
     }
   };
 
+  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -300,6 +315,7 @@ export default function Tasks() {
     });
   };
 
+  // Function to handle due date change
   const handleDueDateChange = (e) => {
     // Convert the selected date and time to the user's local time zone
     const selectedDateTime = new Date(e.target.value);
@@ -321,6 +337,7 @@ export default function Tasks() {
     setDueDate(localDateTime.toISOString().slice(0, 16));
   };
 
+  // Function to get minimum date and time for due date selection
   const getMinimumDateTime = () => {
     const now = new Date();
     const year = now.getFullYear();
@@ -331,6 +348,7 @@ export default function Tasks() {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
+  // Function to get step value for due date selection
   const getStepValue = () => {
     return "900";
   };

@@ -1,9 +1,11 @@
+// Import necessary dependencies and components
 import React, { Fragment, useEffect, useState } from "react";
 import UserHeader from "./UserHeader";
 import axios from "axios";
 import Footer from "./Footer";
 
 export default function AllTasks() {
+  // State variables to manage task data, form inputs, editing state, and search query
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -14,21 +16,26 @@ export default function AllTasks() {
   const [assignedUser, setAssignedUser] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Constants for maximum title and content lengths
   const MAX_TITLE_LENGTH = 100;
   const MAX_CONTENT_LENGTH = 1000;
+  // State variables to track remaining characters for title and content
   const [titleLength, setTitleLength] = useState(MAX_TITLE_LENGTH);
   const [contentLength, setContentLength] = useState(MAX_CONTENT_LENGTH);
 
+  // Effect hook to fetch data and approved users on component mount
   useEffect(() => {
     getData();
     getApprovedUsers();
   }, []);
 
+  // Effect hook to update character counts when title or content changes
   useEffect(() => {
     setTitleLength(MAX_TITLE_LENGTH - title.length);
     setContentLength(MAX_CONTENT_LENGTH - content.length);
   }, [title, content]);
 
+  // Function to format date and time
   const formatDateTime = (dateTimeString) => {
     const options = {
       year: "numeric",
@@ -43,8 +50,9 @@ export default function AllTasks() {
     return dateTime.toLocaleDateString("en-US", options);
   };
 
+  // Function to fetch task data
   const getData = () => {
-    const url = `https://localhost:7089/api/Tasks/TasksList`;
+    const url = `https://localhost:7089/api/Tasks/TasksList`; // API endpoint to fetch task data
     axios
       .get(url)
       .then((result) => {
@@ -58,6 +66,7 @@ export default function AllTasks() {
       });
   };
 
+  // Function to fetch approved users
   const getApprovedUsers = () => {
     const url = `https://localhost:7089/api/Registration/RegistrationList`;
     const requestData = {
@@ -83,90 +92,12 @@ export default function AllTasks() {
       });
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
-
-    const data = {
-      Title: title,
-      AssignedUser: assignedUser,
-      Content: content,
-      DueDate: dueDate,
-      Priority: priority,
-      Email: localStorage.getItem("loggedEmail"),
-      CreatedOn: "",
-    };
-
-    console.log("Data being sent:", data);
-
-    const url = `https://localhost:7089/api/Tasks/AddTasks`;
-    axios
-      .post(url, data)
-      .then((result) => {
-        const dt = result.data;
-        if (dt.statusCode === 200) {
-          getData();
-          Clear();
-          alert("Tasks Added");
-        } else {
-          alert(dt.statusMessage);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this tasks?"
-    );
-
-    if (confirmDelete) {
-      const url = `https://localhost:7089/api/Tasks/DeleteTasks/${id}`;
-      axios
-        .delete(url)
-        .then((result) => {
-          const dt = result.data;
-          if (dt.statusCode === 200) {
-            getData();
-            alert("Tasks Deleted");
-          } else {
-            alert(dt.statusMessage);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-  const handleComplete = (id) => {
-    const tasksToEdit = data.find((tasks) => tasks.id === id);
-    setTitle(tasksToEdit.title);
-    setAssignedUser(tasksToEdit.assignedUser);
-    setContent(tasksToEdit.content);
-    setDueDate(tasksToEdit.dueDate);
-    setPriority(tasksToEdit.priority);
-    setEditingTasksId(id);
-    // setSelectedUser(
-    //   tasksToEdit.assignedUser ? tasksToEdit.assignedUser.id.toString() : ""
-    // );
-  };
-
-  const Clear = () => {
-    setTitle("");
-    setAssignedUser("");
-    setContent("");
-    setDueDate("");
-    setPriority("Low");
-    setEditingTasksId(null);
-    //setSelectedUser("");
-  };
-
+  // Function to get priority color based on due date
   const getPriorityColor = (priority, dueDate) => {
     const timeRemaining = new Date(dueDate).getTime() - new Date().getTime();
     const weeksRemaining = timeRemaining / (1000 * 60 * 60 * 24 * 7);
 
+    // Determine priority color based on weeks remaining
     if (weeksRemaining <= 1) {
       return { color: "red", text: "High" };
     } else if (weeksRemaining <= 2) {
@@ -176,6 +107,7 @@ export default function AllTasks() {
     }
   };
 
+  // Function to scroll to top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -183,6 +115,7 @@ export default function AllTasks() {
     });
   };
 
+  // Filter data based on search query
   const filteredData = searchQuery
     ? data.filter((item) => {
         const assignedUserEmail =

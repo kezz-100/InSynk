@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React, { useState, useEffect, useRef } from "react";
 import UserHeader from "./UserHeader";
 import Footer from "./Footer";
@@ -47,7 +48,7 @@ function PlainCard({ totalTasks, completedTasks }) {
           boxShadow: "0px 4px 8px rgba(2, 2, 2, 2)",
           borderRadius: "10px",
           overflow: "hidden",
-          marginTop: "150px", // Adjusted margin for magnet effect
+          marginTop: "150px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -84,9 +85,11 @@ function PlainCard({ totalTasks, completedTasks }) {
 }
 
 export default function UserDashboard() {
+  // State variables for total and completed tasks
   const [totalTasks, setTotalTasks] = useState(0);
   const [completedTasks, setCompletedTasks] = useState(0);
 
+  // Fetch total tasks from the database on component mount
   useEffect(() => {
     fetchTotalTasks();
   }, []);
@@ -110,15 +113,18 @@ export default function UserDashboard() {
       });
   };
 
+  // State variables for active testimonial index and visible sections
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
   const [visibleSections, setVisibleSections] = useState([]);
 
+  // Testimonials data
   const testimonials = [
     "The best task management system ever! InSynk allows a clear insight of tasks for the day.",
     "So easy to use and understand. My productivity increased so much with InSynk.",
     "My go-to every morning to know what tasks I have for the day. Everyone should be using it!!!",
   ];
 
+  // Automatic testimonial change every 4 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
       setActiveTestimonialIndex((prevIndex) => (prevIndex + 1) % 3);
@@ -127,6 +133,7 @@ export default function UserDashboard() {
     return () => clearInterval(intervalId);
   }, []);
 
+  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

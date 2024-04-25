@@ -1,20 +1,25 @@
+// Import necessary dependencies and components
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import Footer from "./Footer";
 
 const RegistrationList = () => {
+  // State variables to manage data and UI states
   const [data, setData] = useState([]);
   const [registrationApproved, setRegistrationApproved] = useState(false);
   const [registrationDeleted, setRegistrationDeleted] = useState(false);
 
+  // useEffect hook to fetch data when component mounts
   useEffect(() => {
-    getData();
+    getData(); // Call the getData function to fetch registration data
   }, []);
 
+  // Function to fetch registration data from the server
   const getData = () => {
-    const url = `https://localhost:7089/api/Registration/RegistrationList`;
+    const url = `https://localhost:7089/api/Registration/RegistrationList`; // API endpoint to fetch registration data
     const requestData = {
+      // Request data object
       UserType: "USER",
       Name: "name",
       Email: "email",
@@ -22,7 +27,7 @@ const RegistrationList = () => {
       PhoneNo: "phoneNo",
     };
     axios
-      .post(url, requestData)
+      .post(url, requestData) // POST request to fetch registration data
       .then((result) => {
         const responseData = result.data;
         if (responseData.statusCode === 200) {
@@ -34,6 +39,7 @@ const RegistrationList = () => {
       });
   };
 
+  // Function to handle approval of a registration
   const handleApprove = (id) => {
     const requestData = {
       Id: id,
@@ -61,6 +67,7 @@ const RegistrationList = () => {
       });
   };
 
+  // Function to handle deletion of a registration
   const handleDelete = (id) => {
     const url = `https://localhost:7089/api/Registration/DeleteRegistration/${id}`;
     axios
@@ -81,6 +88,8 @@ const RegistrationList = () => {
         console.log(error);
       });
   };
+
+  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

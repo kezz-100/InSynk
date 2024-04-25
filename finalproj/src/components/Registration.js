@@ -1,3 +1,4 @@
+// Import necessary dependencies and components
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Registration() {
+  // State variables to manage form inputs, errors, and UI states
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,10 +27,12 @@ function Registration() {
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Added state for registration success
   const [showInfo, setShowInfo] = useState(false); // Added state for showing info
 
+  // Function to handle form submission
   const handleSave = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
     clearErrors();
 
+    // Validate inputs
     let error = false;
     if (name === "") {
       setNameError("Name cannot be blank");
@@ -83,6 +87,7 @@ function Registration() {
       return;
     }
 
+    // Prepare data object for registration
     const data = {
       Name: name,
       Email: email,
@@ -104,10 +109,12 @@ function Registration() {
       });
   };
 
+  // Function to navigate to login page
   const handleLogin = (e) => {
     navigate("/");
   };
 
+  // Function to clear form inputs
   const clear = () => {
     setName("");
     setEmail("");
@@ -117,6 +124,7 @@ function Registration() {
     setPasswordWidth(0);
   };
 
+  // Function to clear form errors
   const clearErrors = () => {
     setNameError("");
     setEmailError("");
@@ -124,6 +132,7 @@ function Registration() {
     setPhoneNoError("");
   };
 
+  // Function to check password strength and set meter width and color
   const checkPasswordStrength = (value) => {
     let strength = 0;
     if (value.length < 5) {
@@ -147,16 +156,19 @@ function Registration() {
     }
   };
 
+  // Function to handle password change event
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
     checkPasswordStrength(value);
   };
 
+  // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  // Function to handle form reset
   const handleReset = () => {
     clear();
   };

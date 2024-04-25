@@ -1,14 +1,19 @@
+// Import necessary dependencies and components
 import React, { Fragment, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 function AdminHeader() {
+  // Initialize navigate hook for navigation
   const navigate = useNavigate();
+  // State to toggle menu visibility
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Function to toggle menu visibility
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Function to handle logout
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("username");

@@ -1,12 +1,15 @@
+// Import necessary dependencies and components
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 export default function ForgotPassword() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Get navigation function from react-router
+  // State variables to manage email and error message
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Function to handle forgot password
   const handleForgotPassword = (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -25,7 +28,7 @@ export default function ForgotPassword() {
       PhoneNo: "",
       UserType: "",
     };
-
+    // Make POST request to send reset password email
     axios
       .post("https://localhost:7089/api/Registration/ForgotPassword", data)
       .then((response) => {
