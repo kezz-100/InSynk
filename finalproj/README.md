@@ -68,3 +68,45 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+# InSynk
+
+## Project Overview
+
+At the heart of our project lies a commitment to revolutionize teamwork and task management. With **InSynk**, we aim to empower teams to seamlessly collaborate, innovate, and achieve their goals with unparalleled efficiency. By integrating intuitive task creation, streamlined assignment processes, and real-time progress tracking, we're paving the way for enhanced productivity and communication. Join us on this journey to unlock the full potential of your team and elevate your project management experience to new heights.
+
+## Installation Instructions
+
+1. Navigate to project directory
+   cd finalproj
+
+2. Install dependencies
+   npm install
+
+3. Start the development server
+   npm start
+
+4. Open in browser
+   Once the development server starts, open the browser and navigate to https://localhost:3000
+
+## Usage Guide
+
+1. Task creation, admin enters task details such as title and content, the admin then assigns it to a user. Admin is able to edit and update tasks, as well as approve it as complete.
+
+2. Task management, admin and users can access all tasks and users can access specific tasks also which have been assigned to them on their dashboard. Users can update the status of the task as complete from their side, admin is shown this change then approves completion allow the user to now delete the task.
+
+3. Real-time notifications on main accross the system to update the users.
+
+## Configuration
+
+Task display, users can search for tasks based on the entered email address of the assigned user. This feature allows them to only view tasks for that user from a filtered table.
+
+## Contributing Guidelines
+
+Contributions are restricted to specific individuals only.
+
+## License
+
+This project is for educational purposes only. All rights reserved. Redistribution and use of this code, with or without modification, are not permitted without the permission of the author.
