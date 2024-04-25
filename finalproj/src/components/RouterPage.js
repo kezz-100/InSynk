@@ -17,7 +17,6 @@ import ApproveCompletion from "./ApproveCompletion";
 import Timeline from "./Timeline";
 import TimelineU from "./TimelineU";
 import ForgotPassword from "./ForgotPassword";
-import ResetPassword from "./ResetPassword";
 
 //<Route path="/tasklist" element={<TaskList />} />
 //<Route path="/usertask" element={<UserTask />} />
@@ -28,7 +27,6 @@ export default function RouterPage() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
 
         <Route path="/userdashboard" element={<UserDashboard />} />
