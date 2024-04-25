@@ -1,15 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react";
-import UserHeader from "./UserHeader";
+import AdminHeader from "./AdminHeader";
 import axios from "axios";
 import Footer from "./Footer";
 
-export default function News() {
+export default function AllTasksAd() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Low");
   const [data, setData] = useState([]);
-  const [editingNewsId, setEditingNewsId] = useState(null);
+  const [editingTasksId, setEditingTasksId] = useState(null);
   const [approvedUsers, setApprovedUsers] = useState([]);
   const [assignedUser, setAssignedUser] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,13 +44,13 @@ export default function News() {
   };
 
   const getData = () => {
-    const url = `https://localhost:7089/api/News/NewsList`;
+    const url = `https://localhost:7089/api/Tasks/TasksList`;
     axios
       .get(url)
       .then((result) => {
         const data = result.data;
         if (data.statusCode === 200) {
-          setData(data.listNews);
+          setData(data.listTasks);
         }
       })
       .catch((error) => {
@@ -98,7 +98,7 @@ export default function News() {
 
     console.log("Data being sent:", data);
 
-    const url = `https://localhost:7089/api/News/AddNews`;
+    const url = `https://localhost:7089/api/Tasks/AddTasks`;
     axios
       .post(url, data)
       .then((result) => {
@@ -106,7 +106,7 @@ export default function News() {
         if (dt.statusCode === 200) {
           getData();
           Clear();
-          alert("News Added");
+          alert("Tasks Added");
         } else {
           alert(dt.statusMessage);
         }
@@ -118,18 +118,18 @@ export default function News() {
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this news?"
+      "Are you sure you want to delete this tasks?"
     );
 
     if (confirmDelete) {
-      const url = `https://localhost:7089/api/News/DeleteNews/${id}`;
+      const url = `https://localhost:7089/api/Tasks/DeleteTasks/${id}`;
       axios
         .delete(url)
         .then((result) => {
           const dt = result.data;
           if (dt.statusCode === 200) {
             getData();
-            alert("News Deleted");
+            alert("Tasks Deleted");
           } else {
             alert(dt.statusMessage);
           }
@@ -141,15 +141,15 @@ export default function News() {
   };
 
   const handleComplete = (id) => {
-    const newsToEdit = data.find((news) => news.id === id);
-    setTitle(newsToEdit.title);
-    setAssignedUser(newsToEdit.assignedUser);
-    setContent(newsToEdit.content);
-    setDueDate(newsToEdit.dueDate);
-    setPriority(newsToEdit.priority);
-    setEditingNewsId(id);
+    const tasksToEdit = data.find((tasks) => tasks.id === id);
+    setTitle(tasksToEdit.title);
+    setAssignedUser(tasksToEdit.assignedUser);
+    setContent(tasksToEdit.content);
+    setDueDate(tasksToEdit.dueDate);
+    setPriority(tasksToEdit.priority);
+    setEditingTasksId(id);
     // setSelectedUser(
-    //   newsToEdit.assignedUser ? newsToEdit.assignedUser.id.toString() : ""
+    //   tasksToEdit.assignedUser ? tasksToEdit.assignedUser.id.toString() : ""
     // );
   };
 
@@ -159,7 +159,7 @@ export default function News() {
     setContent("");
     setDueDate("");
     setPriority("Low");
-    setEditingNewsId(null);
+    setEditingTasksId(null);
     //setSelectedUser("");
   };
 
@@ -197,7 +197,7 @@ export default function News() {
 
   return (
     <Fragment>
-      <UserHeader />
+      <AdminHeader />
       <br />
       <div
         className="form-group col-md-12"

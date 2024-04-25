@@ -14,13 +14,13 @@ export default function ApproveCompletion() {
   }, []);
 
   const getData = () => {
-    const url = `https://localhost:7089/api/News/NewsList`;
+    const url = `https://localhost:7089/api/Tasks/TasksList`;
     axios
       .get(url)
       .then((result) => {
         const data = result.data;
         if (data.statusCode === 200) {
-          setData(data.listNews);
+          setData(data.listTasks);
         }
       })
       .catch((error) => {
@@ -78,7 +78,7 @@ export default function ApproveCompletion() {
       AssignedUser: "", // Dummy value
     };
 
-    const url = `https://localhost:7089/api/News/NewsApproval`;
+    const url = `https://localhost:7089/api/Tasks/TasksApproval`;
 
     axios
       .post(url, requestData)

@@ -34,7 +34,7 @@ export default function MyTasks() {
   };
 
   const handleDelete = (id) => {
-    const url = `https://localhost:7089/api/Task/DeleteTasks/${id}`;
+    const url = `https://localhost:7089/api/Tasks/DeleteTasks/${id}`;
     axios
       .delete(url)
       .then((result) => {

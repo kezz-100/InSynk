@@ -3,11 +3,11 @@ import React from "react";
 function Footer() {
   return (
     <footer
-      style={{ backgroundColor: "#212529", marginTop: "250px", bottom: 0 }}
+      style={{ backgroundColor: "#212529" }}
       className="navbar navbar-expand-lg navbar-dark bottom"
     >
       <div className="navbar-text" style={{ margin: "auto" }}>
-        Established in 2024 - Founder Kenan Wilson
+        © 2024 InSynk. All rights reserved.
       </div>
     </footer>
   );

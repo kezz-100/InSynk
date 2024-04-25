@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faEyeSlash,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Registration() {
   const navigate = useNavigate();
@@ -19,6 +23,7 @@ function Registration() {
   const [passwordError, setPasswordError] = useState("");
   const [phoneNoError, setPhoneNoError] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState(false); // Added state for registration success
+  const [showInfo, setShowInfo] = useState(false); // Added state for showing info
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -287,13 +292,21 @@ function Registration() {
                               className="btn btn-outline-secondary"
                               type="button"
                               onClick={togglePasswordVisibility}
-                              style={{ minWidth: "38px", marginLeft: "-45px" }}
+                              style={{ marginLeft: "5px" }}
                             >
                               {showPassword ? (
                                 <FontAwesomeIcon icon={faEye} />
                               ) : (
                                 <FontAwesomeIcon icon={faEyeSlash} />
                               )}
+                            </button>
+                            <button
+                              className="btn btn-outline-secondary"
+                              type="button"
+                              style={{ marginLeft: "5px" }}
+                              onClick={() => setShowInfo(!showInfo)} // Toggle showInfo state
+                            >
+                              <FontAwesomeIcon icon={faInfoCircle} />
                             </button>
                           </div>
                           <div style={{ marginTop: "5px" }}>
@@ -320,6 +333,15 @@ function Registration() {
                           <div className="text-muted">{passwordStrength}</div>
                         </div>
                       </div>
+
+                      {/* Conditional rendering for info pop-up */}
+                      {showInfo && (
+                        <div className="alert alert-info" role="alert">
+                          You can only set this password once. Keep it safe! In
+                          the event it has been forgotten you can receive
+                          temporary passwords sent by email.{" "}
+                        </div>
+                      )}
 
                       <div className="form-outline mb-4">
                         <input

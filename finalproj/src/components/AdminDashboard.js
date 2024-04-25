@@ -94,12 +94,12 @@ export default function AdminDashboard() {
   const fetchTotalTasks = () => {
     // Fetch total tasks from the database
     axios
-      .get("https://localhost:7089/api/News/NewsList")
+      .get("https://localhost:7089/api/Tasks/TasksList")
       .then((response) => {
         const data = response.data;
         if (data.statusCode === 200) {
-          setTotalTasks(data.listNews.length);
-          const completed = data.listNews.filter(
+          setTotalTasks(data.listTasks.length);
+          const completed = data.listTasks.filter(
             (task) => task.isCompleted === 1
           );
           setCompletedTasks(completed.length);

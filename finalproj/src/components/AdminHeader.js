@@ -42,12 +42,12 @@ function AdminHeader() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/news" className="nav-link">
+              <Link to="/tasks" className="nav-link">
                 Task Assignment
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/allnewsad" className="nav-link">
+              <Link to="/alltasksad" className="nav-link">
                 All Tasks
               </Link>
             </li>

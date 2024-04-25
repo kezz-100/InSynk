@@ -7,7 +7,7 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleResetPassword = (e) => {
+  const handleForgotPassword = (e) => {
     e.preventDefault();
     setErrorMessage("");
 
@@ -18,14 +18,20 @@ export default function ForgotPassword() {
     }
 
     // Make API call to send reset password email
+    const data = {
+      Name: "",
+      Email: email,
+      Password: "",
+      PhoneNo: "",
+      UserType: "",
+    };
+
     axios
-      .post("https://localhost:7089/api/Registration/ForgotPassword", {
-        Email: email, // Corrected the field name to 'email'
-      })
+      .post("https://localhost:7089/api/Registration/ForgotPassword", data)
       .then((response) => {
         if (response.status === 200) {
           // Email sent successfully
-          navigate("/resetpassword");
+          navigate("/");
         } else {
           // Failed to send email, display error message
           setErrorMessage(response.data.statusMessage);
@@ -45,20 +51,22 @@ export default function ForgotPassword() {
       className="d-flex justify-content-center align-items-center"
       style={{ minHeight: "100vh" }}
     >
-      <div className="card text-center" style={{ width: "300px" }}>
+      <div className="card text-center" style={{ width: "500px" }}>
         <div className="card-header h5 text-white bg-primary">
           Password Reset
         </div>
-        <div className="card-body px-5">
-          <p className="card-text py-2">
-            Enter your email address and we'll send you an email with
-            instructions to reset your password.
+        <div className="card-body px-5 py-4">
+          <p className="card-text mb-4">
+            Enter your email address and we'll send you an email with a
+            temporary password you can use to login.
           </p>
-          <div className="form-outline">
+          <br />
+
+          <div className="form-outline mb-3">
             <input
               type="email"
               id="typeEmail"
-              className="form-control my-3"
+              className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -67,15 +75,18 @@ export default function ForgotPassword() {
             </label>
           </div>
           {errorMessage && (
-            <div className="alert alert-danger">{errorMessage}</div>
+            <div className="alert alert-danger mb-3">{errorMessage}</div>
           )}
+          <br />
           <button
-            className="btn btn-primary w-100"
-            onClick={handleResetPassword}
+            className="btn btn-primary w-100 mb-3"
+            onClick={handleForgotPassword}
           >
-            Reset password
+            Show My New Password
           </button>
-          <div className="d-flex justify-content-between mt-4">
+          <br />
+
+          <div className="d-flex justify-content-between">
             <Link to="/">Login</Link>
             <Link to="/registration">Register</Link>
           </div>

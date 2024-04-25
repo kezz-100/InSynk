@@ -101,7 +101,6 @@ export default function Tasks() {
       });
   };
 
-  /*
   const handleSave = (e) => {
     e.preventDefault();
 
@@ -146,102 +145,22 @@ export default function Tasks() {
     const roundedMinutes = Math.round(selectedDateTime.getMinutes() / 15) * 15;
     selectedDateTime.setMinutes(roundedMinutes);
 
-    // Check if there are any tasks with the same date and time interval
-    const existingTask = data.find((task) => {
-      const taskDateTime = new Date(task.dueDate);
-      return taskDateTime.getTime() === selectedDateTime.getTime();
-    });
-
-    if (existingTask) {
-      setDueDateError("Task already exists at this time");
-      return;
-    } else {
-      setDueDateError(""); // Clear the error message if no existing task found
-    }
-
-    // If no validation errors and no existing task, proceed to save the task
-    const newData = {
-      Title: title,
-      AssignedUser: assignedUser,
-      Content: content,
-      //DueDate: selectedDateTime.toISOString(), // Use the rounded due date time
-      Priority: priority,
-      DueDate: dueDate,
-      Email: localStorage.getItem("loggedEmail"),
-      CreatedOn: "",
-    };
-
-    // Perform the API call to save the task
-    const url = `https://localhost:7089/api/News/AddNews`;
-    axios
-      .post(url, newData)
-      .then((result) => {
-        const dt = result.data;
-        if (dt.statusCode === 200) {
-          getData();
-          Clear();
-          setTaskSaved(true);
-          setSavedMessage("Task saved successfully.");
-          setTimeout(() => {
-            setTaskSaved(false);
-            setSavedMessage("");
-          }, 2000);
-        } else {
-          alert(dt.statusMessage);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  */
-
-  const handleSave = (e) => {
-    e.preventDefault();
-
-    let hasError = false;
-
-    // Check for validation errors
-    if (!title) {
-      setTitleError("Title cannot be empty");
-      hasError = true;
-    } else {
-      setTitleError("");
-    }
-
-    if (!content) {
-      setContentError("Content cannot be empty");
-      hasError = true;
-    } else {
-      setContentError("");
-    }
-
-    if (!dueDate) {
-      setDueDateError("Due date cannot be empty");
-      hasError = true;
-    } else {
-      setDueDateError("");
-    }
-
-    if (!assignedUser) {
-      setAssignedUserError("Assigned user cannot be empty");
-      hasError = true;
-    } else {
-      setAssignedUserError("");
-    }
-
-    if (hasError) {
-      return;
-    }
-
-    const selectedDateTime = new Date(dueDate);
-
-    // Round the selectedDateTime to the nearest 15-minute interval
-    const roundedMinutes = Math.round(selectedDateTime.getMinutes() / 15) * 15;
-    selectedDateTime.setMinutes(roundedMinutes);
-
-    // If editing existing task, update it instead of adding new
+    // If editing existing task, check for existing tasks with the same date and time interval
     if (editingTasksId !== null) {
+      const existingTask = data.find((task) => {
+        const taskDateTime = new Date(task.dueDate);
+        return (
+          taskDateTime.getTime() === selectedDateTime.getTime() &&
+          task.id !== editingTasksId
+        );
+      });
+
+      if (existingTask) {
+        setDueDateError("Task already exists at this time");
+        return;
+      }
+
+      // Proceed to update the task
       const updatedData = {
         Id: editingTasksId,
         Title: title,
@@ -286,7 +205,7 @@ export default function Tasks() {
         return;
       }
 
-      // If no validation errors and no existing task, proceed to save the task
+      // Proceed to save the task
       const newData = {
         Title: title,
         AssignedUser: assignedUser,
@@ -297,8 +216,7 @@ export default function Tasks() {
         CreatedOn: "",
       };
 
-      // Perform the API call to save the task
-      const url = `https://localhost:7089/api/Task/AddTasks`;
+      const url = `https://localhost:7089/api/Tasks/AddTasks`;
       axios
         .post(url, newData)
         .then((result) => {

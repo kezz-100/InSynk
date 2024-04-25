@@ -118,7 +118,7 @@ export default function AllTasks() {
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this task?"
+      "Are you sure you want to delete this tasks?"
     );
 
     if (confirmDelete) {
@@ -129,7 +129,7 @@ export default function AllTasks() {
           const dt = result.data;
           if (dt.statusCode === 200) {
             getData();
-            alert("Task Deleted");
+            alert("Tasks Deleted");
           } else {
             alert(dt.statusMessage);
           }
@@ -149,7 +149,7 @@ export default function AllTasks() {
     setPriority(tasksToEdit.priority);
     setEditingTasksId(id);
     // setSelectedUser(
-    //   newsToEdit.assignedUser ? newsToEdit.assignedUser.id.toString() : ""
+    //   tasksToEdit.assignedUser ? tasksToEdit.assignedUser.id.toString() : ""
     // );
   };
 
