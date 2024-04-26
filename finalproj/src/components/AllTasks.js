@@ -8,13 +8,10 @@ export default function AllTasks() {
   // State variables to manage task data, form inputs, editing state, and search query
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [priority, setPriority] = useState("Low");
   const [data, setData] = useState([]);
-  const [editingTasksId, setEditingTasksId] = useState(null);
   const [approvedUsers, setApprovedUsers] = useState([]);
-  const [assignedUser, setAssignedUser] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("asc"); // State variable to track sorting order
 
   // Constants for maximum title and content lengths
   const MAX_TITLE_LENGTH = 100;
@@ -34,21 +31,6 @@ export default function AllTasks() {
     setTitleLength(MAX_TITLE_LENGTH - title.length);
     setContentLength(MAX_CONTENT_LENGTH - content.length);
   }, [title, content]);
-
-  // Function to format date and time
-  const formatDateTime = (dateTimeString) => {
-    const options = {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      hour12: false,
-    };
-    const dateTime = new Date(dateTimeString);
-    return dateTime.toLocaleDateString("en-US", options);
-  };
 
   // Function to fetch task data
   const getData = () => {
@@ -115,6 +97,19 @@ export default function AllTasks() {
     });
   };
 
+  // Function to handle sorting based on due date
+  const handleSortByDueDate = () => {
+    const sortedData = [...data]; // Create a copy of the original data
+    if (sortBy === "asc") {
+      sortedData.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate)); // Sort in ascending order
+      setSortBy("desc"); // Update sorting order to descending
+    } else {
+      sortedData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)); // Sort in descending order
+      setSortBy("asc"); // Update sorting order to ascending
+    }
+    setData(sortedData); // Update data with sorted data
+  };
+
   // Filter data based on search query
   const filteredData = searchQuery
     ? data.filter((item) => {
@@ -138,6 +133,7 @@ export default function AllTasks() {
       >
         <h3>{"All Tasks"}</h3>
       </div>
+      <br />
       <div
         className="form-group col-md-12"
         style={{ width: "80%", backgroundColor: "white", margin: " auto" }}
@@ -160,6 +156,19 @@ export default function AllTasks() {
         >
           <i className="fa fa-search" />
         </span>
+      </div>
+      <div
+        className="form-group col-md-12"
+        style={{ width: "80%", backgroundColor: "white", margin: " auto" }}
+      >
+        <select
+          value={sortBy}
+          onChange={handleSortByDueDate}
+          style={{ width: "300px" }}
+        >
+          <option value="asc">Earliest to Latest</option>
+          <option value="desc">Latest to Earliest</option>
+        </select>
       </div>
       <br />
       {filteredData.length > 0 ? (
@@ -228,7 +237,7 @@ export default function AllTasks() {
       <div
         style={{
           position: "fixed",
-          bottom: "50px",
+          bottom: "30px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",

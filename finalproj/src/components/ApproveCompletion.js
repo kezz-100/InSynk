@@ -219,7 +219,7 @@ export default function ApproveCompletion() {
       <div
         style={{
           position: "fixed",
-          bottom: "50px",
+          bottom: "30px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",

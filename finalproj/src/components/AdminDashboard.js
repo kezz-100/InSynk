@@ -113,7 +113,7 @@ export default function AdminDashboard() {
 
   // State variables for active testimonial index and visible sections
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
-  const [visibleSections, setVisibleSections] = useState([]);
+  //const [visibleSections, setVisibleSections] = useState([]);
 
   // Testimonials data
   const testimonials = [
@@ -141,6 +141,7 @@ export default function AdminDashboard() {
     });
   };
 
+  /*
   // Function to toggle visibility of sections
   const toggleVisibility = (section) => {
     if (visibleSections.includes(section)) {
@@ -149,6 +150,7 @@ export default function AdminDashboard() {
       setVisibleSections([...visibleSections, section]);
     }
   };
+*/
 
   return (
     <>
@@ -181,7 +183,7 @@ export default function AdminDashboard() {
             boxShadow: "0px 4px 8px rgba(2, 2, 2, 2)",
             borderRadius: "10px",
             overflow: "hidden",
-            marginTop: "350px", // Adjusted margin for magnet effect
+            marginTop: "350px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -240,7 +242,7 @@ export default function AdminDashboard() {
         <div
           style={{
             textAlign: "center",
-            marginTop: "350px", // Adjusted margin for magnet effect
+            marginTop: "350px",
             //marginBottom: "250px",
           }}
         >
@@ -257,24 +259,23 @@ export default function AdminDashboard() {
               display: "flex", // Use flexbox
               justifyContent: "center", // Center horizontally
               alignItems: "center", // Center vertically
-              marginBottom: "150px", // Adjust this value as needed to prevent overlap with the footer
+              marginBottom: "150px",
             }}
           >
             <div className="testimonial-content" style={{ padding: "20px" }}>
               <h2 style={{ textAlign: "center" }}>Testimonials</h2>{" "}
-              {/* Moved h2 here */}
               <img
                 src="/images/quoteopen.png"
                 alt="Opening Quote"
                 className="quote-image"
-                style={{ width: "100px" }} // Adjust the width as needed
+                style={{ width: "100px" }}
               />
               <p>{testimonials[activeTestimonialIndex]}</p>
               <img
                 src="/images/quoteclosed.png"
                 alt="Closing Quote"
                 className="quote-image"
-                style={{ width: "100px" }} // Adjust the width as needed
+                style={{ width: "100px" }}
               />
               {/* Font Awesome Icons */}
               <div
@@ -307,7 +308,7 @@ export default function AdminDashboard() {
                 boxShadow: "0px 4px 8px rgba(2, 2, 2, 2)",
                 borderRadius: "10px",
                 overflow: "hidden",
-                marginTop: "350px", // Adjusted margin for magnet effect
+                marginTop: "350px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -351,7 +352,7 @@ export default function AdminDashboard() {
       <div
         style={{
           position: "fixed",
-          bottom: "50px",
+          bottom: "30px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",

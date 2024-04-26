@@ -8,13 +8,10 @@ export default function AllTasksAd() {
   // State variables to manage task data, form inputs, editing state, and search query
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [priority, setPriority] = useState("Low");
   const [data, setData] = useState([]);
-  const [editingTasksId, setEditingTasksId] = useState(null);
   const [approvedUsers, setApprovedUsers] = useState([]);
-  const [assignedUser, setAssignedUser] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("asc"); // State variable to track sorting order
 
   // Constants for maximum title and content lengths
   const MAX_TITLE_LENGTH = 100;
@@ -35,24 +32,9 @@ export default function AllTasksAd() {
     setContentLength(MAX_CONTENT_LENGTH - content.length);
   }, [title, content]);
 
-  // Function to format date and time
-  const formatDateTime = (dateTimeString) => {
-    const options = {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      hour12: false,
-    };
-    const dateTime = new Date(dateTimeString);
-    return dateTime.toLocaleDateString("en-US", options); // Format date time string
-  };
-
   // Function to fetch task data
   const getData = () => {
-    const url = `https://localhost:7089/api/Tasks/TasksList`;
+    const url = `https://localhost:7089/api/Tasks/TasksList`; // API endpoint to fetch task data
     axios
       .get(url)
       .then((result) => {
@@ -77,7 +59,7 @@ export default function AllTasksAd() {
       PhoneNo: "phoneNo",
     };
     axios
-      .post(url, requestData) // Send POST request to fetch users
+      .post(url, requestData)
       .then((result) => {
         const responseData = result.data;
         if (responseData.statusCode === 200) {
@@ -94,11 +76,10 @@ export default function AllTasksAd() {
 
   // Function to get priority color based on due date
   const getPriorityColor = (priority, dueDate) => {
-    const timeRemaining = new Date(dueDate).getTime() - new Date().getTime(); // Calculate time remaining until due date
-    const weeksRemaining = timeRemaining / (1000 * 60 * 60 * 24 * 7); // Convert time remaining to weeks
+    const timeRemaining = new Date(dueDate).getTime() - new Date().getTime();
+    const weeksRemaining = timeRemaining / (1000 * 60 * 60 * 24 * 7);
 
     // Determine priority color based on weeks remaining
-
     if (weeksRemaining <= 1) {
       return { color: "red", text: "High" };
     } else if (weeksRemaining <= 2) {
@@ -114,6 +95,19 @@ export default function AllTasksAd() {
       top: 0,
       behavior: "smooth",
     });
+  };
+
+  // Function to handle sorting based on due date
+  const handleSortByDueDate = () => {
+    const sortedData = [...data]; // Create a copy of the original data
+    if (sortBy === "asc") {
+      sortedData.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate)); // Sort in ascending order
+      setSortBy("desc"); // Update sorting order to descending
+    } else {
+      sortedData.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)); // Sort in descending order
+      setSortBy("asc"); // Update sorting order to ascending
+    }
+    setData(sortedData); // Update data with sorted data
   };
 
   // Filter data based on search query
@@ -139,6 +133,7 @@ export default function AllTasksAd() {
       >
         <h3>{"All Tasks"}</h3>
       </div>
+      <br />
       <div
         className="form-group col-md-12"
         style={{ width: "80%", backgroundColor: "white", margin: " auto" }}
@@ -161,6 +156,19 @@ export default function AllTasksAd() {
         >
           <i className="fa fa-search" />
         </span>
+      </div>
+      <div
+        className="form-group col-md-12"
+        style={{ width: "80%", backgroundColor: "white", margin: " auto" }}
+      >
+        <select
+          value={sortBy}
+          onChange={handleSortByDueDate}
+          style={{ width: "300px" }}
+        >
+          <option value="asc">Earliest to Latest</option>
+          <option value="desc">Latest to Earliest</option>
+        </select>
       </div>
       <br />
       {filteredData.length > 0 ? (
@@ -229,7 +237,7 @@ export default function AllTasksAd() {
       <div
         style={{
           position: "fixed",
-          bottom: "50px",
+          bottom: "30px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",

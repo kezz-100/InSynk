@@ -43,6 +43,7 @@ export default function Tasks() {
     setContentLength(MAX_CONTENT_LENGTH - content.length);
   }, [title, content]);
 
+  /*
   // Function to format date and time string
   const formatDateTime = (dateTimeString) => {
     const options = {
@@ -57,6 +58,7 @@ export default function Tasks() {
     const dateTime = new Date(dateTimeString);
     return dateTime.toLocaleDateString("en-US", options);
   };
+  */
 
   // Function to fetch tasks data from the server
   const getData = () => {
@@ -561,7 +563,7 @@ export default function Tasks() {
       <div
         style={{
           position: "fixed",
-          bottom: "50px",
+          bottom: "30px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",

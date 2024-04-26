@@ -157,7 +157,7 @@ export default function Timeline() {
           <DateNavigator />
           <TodayButton />
 
-          {/* Customize appointment appearance and add click event */}
+          {/* Appointment appearance and click event */}
 
           <Appointments
             appointmentComponent={({ style, data, onClick }) => (
@@ -203,7 +203,7 @@ export default function Timeline() {
       <div
         style={{
           position: "fixed",
-          bottom: "50px",
+          bottom: "30px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",

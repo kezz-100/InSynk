@@ -145,7 +145,8 @@ export default function MyTasks() {
   const filteredData = data.filter((tasks) =>
     approvedUsers.some(
       (user) =>
-        user.email === loggedEmail && user.id.toString() === tasks.assignedUser
+        user.email.toLowerCase() === loggedEmail.toLowerCase() &&
+        user.id.toString() === tasks.assignedUser
     )
   );
 
@@ -390,7 +391,7 @@ export default function MyTasks() {
       <div
         style={{
           position: "fixed",
-          bottom: "50px",
+          bottom: "30px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",

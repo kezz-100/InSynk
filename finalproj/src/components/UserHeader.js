@@ -29,6 +29,7 @@ export default function UserHeader() {
     navigate("/");
   };
 
+  /*
   // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
@@ -36,6 +37,7 @@ export default function UserHeader() {
       behavior: "smooth",
     });
   };
+*/
 
   return (
     <Fragment>

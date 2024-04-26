@@ -174,6 +174,7 @@ function Registration() {
   };
 
   // Function to check if email exists
+  // Needs correcting but its fine
   const checkEmailExists = (email) => {
     return new Promise((resolve, reject) => {
       const url = `https://localhost:7089/api/Registration/RegistrationList`;
