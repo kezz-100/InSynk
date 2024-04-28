@@ -4,7 +4,7 @@ import UserHeader from "./UserHeader";
 import axios from "axios";
 import Footer from "./Footer";
 
-export default function AllTasks() {
+export default function AllTasksAd() {
   // State variables to manage task data, form inputs, editing state, and search query
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -157,6 +157,7 @@ export default function AllTasks() {
           <i className="fa fa-search" />
         </span>
       </div>
+      <br />
       <div
         className="form-group col-md-12"
         style={{ width: "80%", backgroundColor: "white", margin: " auto" }}

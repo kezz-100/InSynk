@@ -291,6 +291,7 @@ export default function MyTasks() {
           </p>
         </div>
       )}
+      <br />
       {filteredData.length > 0 ? (
         <table
           className="table stripped table-hover mt-4"

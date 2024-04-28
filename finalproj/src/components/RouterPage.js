@@ -5,6 +5,7 @@ import AdminDashboard from "./AdminDashboard";
 import Login from "./Login";
 import Registration from "./Registration";
 import UserDashboard from "./UserDashboard";
+import Initial from "./Initial";
 
 import RegistrationList from "./RegistrationList";
 import Tasks from "./Tasks";
@@ -21,7 +22,7 @@ export default function RouterPage() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
 
@@ -30,6 +31,8 @@ export default function RouterPage() {
         <Route path="/admindashboard" element={<AdminDashboard />} />
 
         <Route path="/registrationlist" element={<RegistrationList />} />
+
+        <Route path="/" element={<Initial />} />
 
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/timeline" element={<Timeline />} />

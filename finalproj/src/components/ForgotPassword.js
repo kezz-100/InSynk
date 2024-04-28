@@ -90,8 +90,8 @@ export default function ForgotPassword() {
           <br />
 
           <div className="d-flex justify-content-between">
-            <Link to="/">Login</Link>
-            <Link to="/registration">Register</Link>
+            <Link to="/login">Log in</Link>
+            <Link to="/registration">Sign up</Link>
           </div>
         </div>
       </div>

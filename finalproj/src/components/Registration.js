@@ -111,7 +111,7 @@ function Registration() {
 
   // Function to navigate to login page
   const handleLogin = (e) => {
-    navigate("/");
+    navigate("/login");
   };
 
   // Function to clear form inputs
@@ -394,7 +394,7 @@ function Registration() {
                           className="btn btn-light btn-lg"
                           onClick={(e) => handleSave(e)}
                         >
-                          Register
+                          Sign up
                         </button>
                         &nbsp;
                         <button
@@ -403,7 +403,7 @@ function Registration() {
                           className="btn btn-light btn-lg"
                           onClick={(e) => handleLogin(e)}
                         >
-                          Login
+                          Log in
                         </button>
                       </div>
                     </div>

@@ -150,7 +150,7 @@ function Login() {
                   className="btn btn-primary btn-lg btn-block"
                   onClick={(e) => handleLogin(e)}
                 >
-                  Sign in
+                  Log in
                 </button>
 
                 <a
@@ -163,7 +163,7 @@ function Login() {
                   href="/registration"
                   role="button"
                 >
-                  <i className="fab fa-twitter me-2"></i>Registration
+                  <i className="fab fa-twitter me-2"></i>Sign up
                 </a>
               </form>
             </div>

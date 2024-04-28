@@ -157,6 +157,7 @@ export default function AllTasksAd() {
           <i className="fa fa-search" />
         </span>
       </div>
+      <br />
       <div
         className="form-group col-md-12"
         style={{ width: "80%", backgroundColor: "white", margin: " auto" }}
