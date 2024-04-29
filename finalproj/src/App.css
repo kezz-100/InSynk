@@ -40,10 +40,10 @@
 .bubble {
   width: 300px;
   height: 300px;
-  background-color: rgb(160, 160, 160); /* Slightly gray background */
+  background-color: rgb(160, 160, 160);
   border-radius: 50%;
   position: absolute;
-  animation: float 4s infinite ease-in-out; /* CSS animation */
+  animation: float 4s infinite ease-in-out;
 }
 .bubble1 {
   top: 5%;

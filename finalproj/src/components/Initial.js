@@ -10,7 +10,7 @@ function Initial() {
         left: 0,
         width: "100%",
         height: "100%",
-        overflow: "hidden", // Prevent scroll
+        overflow: "hidden",
       }}
     >
       {/* Video background */}
@@ -38,7 +38,7 @@ function Initial() {
           transform: "translate(-50%, -50%)",
           textAlign: "center",
           color: "black",
-          zIndex: 1, // Set z-index higher than video
+          zIndex: 1, // z-index higher than video
         }}
       >
         <h1
@@ -92,10 +92,9 @@ function Initial() {
             alignItems: "center",
             color: "black",
             fontSize: "1.5rem",
-            //background: "#e0e0e0" /* Slightly lighter gray background */,
+            //background: "#e0e0e0"
             borderRadius: "50%",
-            boxShadow:
-              "0 8px 16px rgba(0, 0, 0, 0.2)" /* Add shadow for depth */,
+            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
           }}
         >
           <p style={{ margin: 0 }}>
@@ -113,10 +112,9 @@ function Initial() {
             alignItems: "center",
             color: "black",
             fontSize: "1.5rem",
-            //background: "#e0e0e0" /* Slightly lighter gray background */,
+            //background: "#e0e0e0"
             borderRadius: "50%",
-            boxShadow:
-              "0 8px 16px rgba(0, 0, 0, 0.2)" /* Add shadow for depth */,
+            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
           }}
         >
           <p style={{ margin: 0 }}>Work Remotely Effortlessly</p>
