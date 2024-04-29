@@ -34,7 +34,7 @@ export default function ForgotPassword() {
       .then((response) => {
         if (response.status === 200) {
           // Email sent successfully
-          navigate("/");
+          navigate("/login");
         } else {
           // Failed to send email, display error message
           setErrorMessage(response.data.statusMessage);
