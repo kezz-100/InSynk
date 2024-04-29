@@ -23,7 +23,7 @@ function Initial() {
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          opacity: "0.3",
+          opacity: "0.4",
           position: "absolute",
           zIndex: -1, // Set video z-index lower than other elements
         }}
@@ -92,6 +92,10 @@ function Initial() {
             alignItems: "center",
             color: "black",
             fontSize: "1.5rem",
+            //background: "#e0e0e0" /* Slightly lighter gray background */,
+            borderRadius: "50%",
+            boxShadow:
+              "0 8px 16px rgba(0, 0, 0, 0.2)" /* Add shadow for depth */,
           }}
         >
           <p style={{ margin: 0 }}>
@@ -109,9 +113,13 @@ function Initial() {
             alignItems: "center",
             color: "black",
             fontSize: "1.5rem",
+            //background: "#e0e0e0" /* Slightly lighter gray background */,
+            borderRadius: "50%",
+            boxShadow:
+              "0 8px 16px rgba(0, 0, 0, 0.2)" /* Add shadow for depth */,
           }}
         >
-          <p style={{ margin: 0 }}>Work Remotly Effortlessly</p>
+          <p style={{ margin: 0 }}>Work Remotely Effortlessly</p>
         </div>
       </div>
     </div>
