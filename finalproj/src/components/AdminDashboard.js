@@ -192,41 +192,40 @@ export default function AdminDashboard() {
         >
           <div style={{ flex: "1", padding: "20px" }}>
             <h2 style={{ textAlign: "center" }}> Overview</h2>
+
             <p>
-              <p>
-                At the heart of our project lies a commitment to revolutionize
-                teamwork and task management. With 'InSynk,' we aim to empower
-                teams to seamlessly collaborate, innovate, and achieve their
-                goals with unparalleled efficiency. By integrating intuitive
-                task creation, streamlined assignment processes, and real-time
-                progress tracking, we're paving the way for enhanced
-                productivity and communication. Join us on this journey to
-                unlock the full potential of your team and elevate your project
-                management experience to new heights.
-              </p>
-              Key features include:
-              <ul>
-                <li>
-                  Task Creation: Create tasks with detailed descriptions and due
-                  dates.
-                </li>
-                <li>
-                  Assignment: Tasks can be assigned to specific team members,
-                  facilitating clear accountability.
-                </li>
-                <li>
-                  Progress Tracking: Real-time progress tracking allows users to
-                  monitor task status and completion. Allow your team members to
-                  delete the task only once its been finished and verified by
-                  you.
-                </li>
-                <li>
-                  Notifications: Automatic notifications to keep team members
-                  informed, notfications applied at every main event so your
-                  team won't miss a thing.
-                </li>
-              </ul>
+              At the heart of our project lies a commitment to revolutionize
+              teamwork and task management. With 'InSynk,' we aim to empower
+              teams to seamlessly collaborate, innovate, and achieve their goals
+              with unparalleled efficiency. By integrating intuitive task
+              creation, streamlined assignment processes, and real-time progress
+              tracking, we're paving the way for enhanced productivity and
+              communication. Join us on this journey to unlock the full
+              potential of your team and elevate your project management
+              experience to new heights.
             </p>
+            <p>Key features include:</p>
+
+            <ul>
+              <li>
+                Task Creation: Create tasks with detailed descriptions and due
+                dates.
+              </li>
+              <li>
+                Assignment: Tasks can be assigned to specific team members,
+                facilitating clear accountability.
+              </li>
+              <li>
+                Progress Tracking: Real-time progress tracking allows users to
+                monitor task status and completion. Allow your team members to
+                delete the task only once its been finished and verified by you.
+              </li>
+              <li>
+                Notifications: Automatic notifications to keep team members
+                informed, notfications applied at every main event so your team
+                won't miss a thing.
+              </li>
+            </ul>
           </div>
           <div style={{ flex: "1" }}>
             <img
