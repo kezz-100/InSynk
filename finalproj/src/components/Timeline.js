@@ -137,7 +137,7 @@ export default function Timeline() {
         className="form-group col-md-12"
         style={{ width: "80%", backgroundColor: "white", margin: " auto" }}
       >
-        <h3>{"Calender"}</h3>
+        <h3>{"Calendar"}</h3>
       </div>
 
       <div
