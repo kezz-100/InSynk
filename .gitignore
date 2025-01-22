@@ -1,0 +1,53 @@
+# Dependencies
+**/node_modules/
+**/packages/
+
+# Production build folders
+**/build/
+**/dist/
+**/obj/
+**/bin/
+
+# Environment files
+**/.env
+**/.env.local
+**/.env.development
+**/.env.test
+**/.env.production
+**/appsettings.Development.json
+**/firebase-debug.log
+
+# IDE files
+**/.vs/
+**/.vscode/
+**/*.suo
+**/*.user
+**/*.userosscache
+**/*.sln.docstates
+
+# Debug files
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/*.pdb
+
+# Cache
+**/.eslintcache
+**/*.cache
+
+# Misc
+**/.DS_Store
+**/Thumbs.db
+**/*.db
+
+# Specific to your React project
+**/coverage/
+**/.next/
+**/out/
+
+# Specific to your .NET project
+**/*.swp
+**/*.swo
+**/project.lock.json
+**/project.fragment.lock.json
+**/artifacts/
